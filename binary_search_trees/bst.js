@@ -37,7 +37,7 @@ const Tree = (arr) => {
 
       return n;
     };
-    fn(this.root);
+    fn(root);
   };
 
   const remove = (value) => {
@@ -61,7 +61,7 @@ const Tree = (arr) => {
       p = r;
       return value < r.data ? fn(r.left, p) : fn(r.right, p);
     };
-    return fn(this.root);
+    return fn(root);
   };
 
   const find = (value) => {
@@ -69,11 +69,11 @@ const Tree = (arr) => {
       if (root === null || root.data === value) return root;
       return value < root.data ? fn(root.left) : fn(root.right);
     };
-    return fn(this.root);
+    return fn(root);
   };
 
   const levelOrder = (fn) => {
-    let queue = [this.root];
+    let queue = [root];
     const f = (node, i) => {
       if (!node) return;
       if (node.left) queue.push(node.left);
@@ -96,7 +96,7 @@ const Tree = (arr) => {
       if (node.right) queue.push(node.right);
       f(queue.shift());
     };
-    f(this.root);
+    f(root);
 
     if (!fn) return result.map((i) => i.data);
     return;
@@ -110,7 +110,7 @@ const Tree = (arr) => {
       f(node.left);
       f(node.right);
     };
-    f(this.root);
+    f(root);
 
     if (!fn) return result.map((i) => i.data);
     return;
@@ -124,7 +124,7 @@ const Tree = (arr) => {
       fn ? fn(node) : result.push(node);
       f(node.right);
     };
-    f(this.root);
+    f(root);
 
     if (!fn) return result.map((i) => i.data);
     return;
@@ -138,7 +138,7 @@ const Tree = (arr) => {
       f(node.right);
       fn ? fn(node) : result.push(node);
     };
-    f(this.root);
+    f(root);
 
     if (!fn) return result.map((i) => i.data);
     return;
@@ -154,16 +154,11 @@ const Tree = (arr) => {
       if (node === n) return 0;
       return node.data < n.data ? f(n.left) + 1 : f(n.right) + 1;
     };
-    return f(this.root);
+    return f(root);
   };
 
-  const isBalanced = () =>
-    Math.abs(height(this.root.left) - height(this.root.right)) < 1;
-
-  const rebalance = () => {
-    this.root = buildTree(preorder());
-  };
-
+  const isBalanced = () => Math.abs(height(root.left) - height(root.right)) < 1;
+  const rebalance = () => (this.root = buildTree(preorder()));
   const destroyBalance = () => {
     let x = Math.floor(Math.random() * 500);
     for (let i = 0; i < 5; i++) {
@@ -181,10 +176,11 @@ const Tree = (arr) => {
         f(node.left, `${prefix}${isLeft ? "    " : "│   "}`, true);
       }
     };
-    node ? f(node) : f(this.root);
+    node ? f(node) : f(root);
   };
 
-  this.root = buildTree(arr);
+  root = buildTree(arr);
+
   return {
     prettyPrint,
     insert,
