@@ -199,7 +199,43 @@ const Tree = (arr) => {
   };
 };
 
-const jason = Tree([
-  10, 5, 2, 1, 3, 4, 7, 6, 8, 9, 15, 12, 11, 13, 14, 18, 16, 17, 19, 20, 728,
-  727, 726, 725, 720, 721,
-]);
+function driver() {
+  let arr = [];
+  for (let i = 0; i < 15; i++) {
+    arr.push(Math.floor(Math.random() * 100));
+  }
+  let main = Tree(arr);
+  console.log("Tree created! here take a look:");
+  main.prettyPrint();
+
+  console.log(
+    main.isBalanced() ? "yea it is balanced" : "nope its not balanced"
+  );
+
+  console.log(main.levelOrder());
+  console.log(main.preorder());
+  console.log(main.inorder());
+  console.log(main.postorder());
+
+  console.log("now to unbalance the tree, here:");
+  main.destroyBalance();
+  main.prettyPrint();
+  console.log(
+    main.isBalanced() ? "yea it is balanced" : "nope its not balanced"
+  );
+
+  console.log("mhm now we can fix the tree");
+  main.rebalance();
+  main.prettyPrint();
+  console.log(
+    main.isBalanced() ? "yea it is balanced" : "nope its not balanced"
+  );
+
+  console.log(main.levelOrder());
+  console.log(main.preorder());
+  console.log(main.inorder());
+  console.log(main.postorder());
+
+  console.log("done!!");
+}
+driver();
